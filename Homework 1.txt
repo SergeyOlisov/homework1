@@ -1,0 +1,144 @@
+Задание 1.
+Пользователь вводит с клавиатуры расстояние до аэропорта и время, за которое нужно доехать.
+Вычислить скорость, с которой ему нужно ехать.
+
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    float speed, distance, time;
+    int computation = 0;
+    while (computation < 1)
+    {
+        cout << "Enter the distance to the airport (in kilometers): ";
+        cin >> distance;
+        cout << endl;
+        cout << "Enter the time for which you need to get to the airport (in hours): ";
+        cin >> time;
+        cout << endl;
+        if (distance > 0 && time > 0) {
+            speed = distance / time;
+            cout << "Necessary speed to overcome the distance in the specified time (in km / h): " << speed << endl;
+            if (speed > 60 && speed < 130) {
+                cout << "Be careful on the road!" << endl;
+            }
+            if (speed > 130 && speed < 1079252848.8) {
+                cout << "You can't go so fast!" << endl;
+            }
+            if (speed > 1079252848.8) {
+                cout << "Nothing can exceed the speed of light!" << endl;
+            }
+        computation = 1;
+        } else {
+            cout << "Enter valid values!" << endl;
+        }
+    }
+}
+
+Задание 2.
+Пользователь вводит с клавиатуры время начала и время завершения телефонного разговора
+(часы, минуты и секунды). Посчитать стоимость разговора, если стоимость минуты – 30 копеек.
+
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int hour1=0, minute1=0, second1=0, hour2=0, minute2=0, second2=0, minute=0 , second=0, hour=0;
+    float kopek = 0, rubles = 0;
+        cout << "Enter the start time of the call(hour, minute, second): ";
+        cin >> hour1;
+        cout << endl;
+        cin >> minute1;
+        cout << endl;
+        cin >> second1;
+        cout << endl;
+        cout << "Enter the end time of call(hour, minute, second): ";
+        cin >> hour2;
+        cout << endl;
+        cin >> minute2;
+        cout << endl;
+        cin >> second2;
+        cout << endl;
+        if (second1 >= 0 && second2 >= 0 && minute1 >= 0 && minute2 >= 0 && hour1 >= 0 && hour2 >= 0 && second1 < 60 && second2 < 60 && minute1 < 60 && minute2 < 60 && hour1 < 24 && hour2 < 24)
+        {
+            while (hour1 != hour2 || minute1 != minute2 || second1 != second2)
+            {
+                    ++second1;
+                    if (second1 == 60)
+                    {
+                        ++minute1;
+                        kopek = kopek + 30;
+                        second1 = 0;
+                    }
+                    if (minute1 == 60)
+                    {
+                        ++hour1;
+                        minute1 = 0;
+                    }
+                    if (hour1 == 24)
+                    {
+                        hour1 = 0;
+                    }
+            }
+                rubles = kopek/100;
+                cout << "Call cost: " << rubles << " Rub";
+        } else {
+            cout << "Enter the correct time!" << endl;
+        }
+}
+
+
+Задание 3.
+Пользователь вводит с клавиатуры расстояние, расход бензина на 100 км и стоимость трех
+видов бензина. Вывести на экран сравнительную таблицу со стоимостью поездки на разных
+видах бензина.
+
+
+
+#include <iostream>
+
+using namespace std;
+
+double Comp(double* dist, double* ai_con, double* ai_cost)
+{
+double travel_cost;
+
+travel_cost = (*ai_con) * (*ai_cost) * ((*dist)/100);
+
+return travel_cost;
+}
+
+int main()
+{
+double distance, fuel_consumption92, fuel_consumption95, fuel_consumption98, fuel_cost92, fuel_cost95, fuel_cost98;
+double travel_cost92, travel_cost95, travel_cost98;
+cout << "Enter the distance of trip: ";
+cin >> distance;
+cout << "Enter 92 petrol consumption: ";
+cin >> fuel_consumption92;
+cout << "Enter the cost of 92 gasoline: ";
+cin >> fuel_cost92;
+cout << "Enter 95 petrol consumption: ";
+cin >> fuel_consumption95;
+cout << "Enter the cost of 95 gasoline: ";
+cin >> fuel_cost95;
+cout << "Enter 98 petrol consumption: ";
+cin >> fuel_consumption98;
+cout << "Enter the cost of 98 gasoline: ";
+cin >> fuel_cost98;
+
+travel_cost92 = Comp(&distance, &fuel_consumption92, &fuel_cost92);
+travel_cost95 = Comp(&distance, &fuel_consumption95, &fuel_cost95);
+travel_cost98 = Comp(&distance, &fuel_consumption98, &fuel_cost98);
+
+cout << "Cost of travel on 92 gasoline - " << travel_cost92 << "rub" << endl;
+cout << "Cost of travel on 95 gasoline - " << travel_cost95 << "rub" << endl;
+cout << "Cost of travel on 98 gasoline - " << travel_cost98 << "rub" << endl;
+
+}
